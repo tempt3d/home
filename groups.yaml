@@ -1,0 +1,173 @@
+# GROUPS
+
+aaron:
+  name: Aaron
+  entities:
+    - device_tracker.aaronphone_wifi
+
+erica:
+  name: Erica
+  entities:
+    - device_tracker.ericasiphone
+    - device_tracker.erica_iphone_gps
+
+family:
+  name: Family
+  control: hidden
+  entities: 
+    - person.erica
+    - person.aaron
+
+outsideswitches:
+  name: Outdoor Switches
+  entities:
+    - switch.back_door_light
+    - switch.front_door_light
+
+kitchen:
+  name: Kitchen
+  entities:
+    - light.gateway_light_7811dcb25887
+    - binary_sensor.switch_158d000210a061
+
+kitchen_lights:
+  name: Kitchen Lights
+  entities: 
+    - light.gateway_light_7811dcb25887
+    - light.hue_lightstrip
+    - light.hue_lightstrip2
+
+occupency:
+  name: Occupency Sensors
+  control: hidden
+  entities:
+    - binary_sensor.basement_occupancy
+    - binary_sensor.bedroom_occupancy
+    - binary_sensor.home_occupancy
+    - binary_sensor.living_room_occupancy
+    - binary_sensor.motion_sensor_158d0001d69546
+
+temperature:
+  name: Temperature
+  control: hidden 
+  entities:
+    - sensor.home_temperature
+    - sensor.living_room_temperature
+    - sensor.temperature_158d000201ee00
+    - sensor.bedroom_temperature
+    - sensor.temperature_158d000201c949
+    - sensor.basement_temperature
+
+humidity:
+  name: Humidity
+  control: hidden
+  entities:
+     - sensor.home_humidity
+     - sensor.humidity_158d000201c949
+     - sensor.humidity_158d000201ee00
+
+doors:
+  name: Door Sensors
+  control: hidden
+  entities:
+    - binary_sensor.door_window_sensor_158d000222ca73
+    - binary_sensor.door_window_sensor_158d0001f3990c
+    - binary_sensor.door_window_sensor_158d000224ff31
+
+leak:
+   name: Leak Detectors
+   control: hidden
+   entities: 
+     - binary_sensor.water_leak_sensor_158d000211227a
+
+pihole:
+   name: Pi-hole Status
+   control: hidden
+   entities: 
+      - sensor.pi_hole_ads_blocked_today  
+
+# synology:
+#   name: Synology Status
+#   control: hidden
+#   entities:
+#      - sensor.cpu_load_total
+#      - sensor.memory_usage_real
+#      - sensor.network_up 
+
+speedtest:
+   name: Speedtest Results
+   control: hidden
+   entities:
+      - sensor.speedtest_ping
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+
+# sabnzbd:
+#   name: Sabnzbd
+#   control: hidden
+#   entities:
+#      - sensor.sabnzbd_status
+#      - sensor.sabnzbd_speed
+#      - sensor.sabnzbd_queue
+#      - sensor.sabnzbd_left
+#      - sensor.sabnzbd_monthly_total
+
+system:
+   name: System Monitor
+   control: hidden
+   entities:
+      - sensor.processor_use
+      - sensor.disk_free
+      - sensor.memory_free
+
+camera:
+   name: Cameras
+   entities:
+      - camera.doorbell
+      - camera.back_alley
+
+weather:
+      name: Weather
+      control: hidden
+      entities: 
+        - sensor.dark_sky_summary
+        - sensor.dark_sky_hourly_summary
+        - sensor.dark_sky_temperature
+        - sensor.dark_sky_precip_probability
+        - sensor.dark_sky_wind_speed
+        - sensor.dark_sky_humidity
+
+# Automation Groupings
+location_notify:
+   name: Locations
+   control: hidden
+   entities:
+      - automation.aaron_is_home_notification
+      - automation.erica_is_home_notification
+      - automation.erica_is_away_notification
+      - automation.erica_is_leaving_work
+
+light_notify:
+   name: Lights
+   control: hidden
+   entities:
+      - automation.backdoor_light_on
+      - automation.backdoor_light_off
+      - automation.kitchen_motion_sensor_lights_on
+      - automation.motion_sensor_lights_off
+      - automation.turn_on_the_lights_when_the_sun_sets
+      - automation.turn_off_light_at_midnight
+
+door_notify:
+   name: Doors
+   control: hidden
+   entities:
+      - automation.door_chimes
+      - automation.garage_door_is_open
+      - automation.door_opened_while_gone
+
+water_notify:
+   name: Water 
+   control: hidden
+   entities: 
+      - automation.water_alert_notification

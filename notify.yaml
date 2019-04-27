@@ -1,0 +1,5 @@
+
+  - name: pushover
+    platform: pushover
+    api_key: atexm4khvu25v8ftcr5kpnz3g6e7jo
+    user_key: u5xkz1zqozuiryhgvjcqxze3wbaphi

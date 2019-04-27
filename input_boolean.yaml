@@ -1,0 +1,3 @@
+lightstrip_auto_on:
+  name: "lightstrip on automatically"
+  initial: off

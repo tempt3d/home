@@ -1,0 +1,6 @@
+# Binary Sensors
+
+  - platform: workday
+    country: CA
+    province: AB
+    workdays: [mon, tue, wed, thu]

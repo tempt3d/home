@@ -1,0 +1,106 @@
+homeassistant:
+  name: Home
+  latitude: !secret latitude
+  longitude: !secret longitude
+  elevation: 645
+  unit_system: metric
+  time_zone: America/Edmonton
+
+# Paths  
+  customize: !include customize.yaml
+#  packages:
+#    pack1: !include locks.yaml
+
+http:
+  base_url: !secret base_url
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+#  api_password: !secret api_password
+
+frontend:
+
+# Enables configuration UI
+config:
+updater:
+person:
+hassio:
+
+# Paths
+notify: !include notify.yaml
+group: !include groups.yaml
+automation: !include_dir_merge_list automations
+script: !include scripts.yaml
+switch: !include switch.yaml
+device_tracker: !include device_tracker.yaml
+sensor: !include sensor.yaml
+zone: !include zone.yaml
+timer: !include timers.yaml
+camera: !include camera.yaml
+binary_sensor: !include binary_sensor.yaml
+# input_select: !include input_select.yaml
+input_boolean: !include input_boolean.yaml
+
+# Show links to resources in log and frontend
+# introduction:
+
+# Weather
+weather:
+  - platform: darksky
+    api_key: !secret darksky_key
+    mode: daily
+
+# Yaml Lovelace
+lovelace:
+  mode: yaml
+
+# Discover some devices automatically
+# discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+# conversation:
+
+# Enables support for tracking state changes over time
+history:
+logbook:
+map:
+sun:
+system_health:
+
+# Weather prediction
+# sensor:
+#  - platform: yr
+
+# tts:
+#  - platform: google
+
+# cloud:
+
+# Asuswrt
+asuswrt:
+  host: !secret asus_host
+  username: !secret asus_user
+  password: !secret asus_pass
+  protocol: ssh
+# port: 23
+
+# Xiaomi Hub
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - key: !secret hub_key
+
+# Ecobee
+ecobee:
+  api_key: !secret ecobee_api
+
+# alexa:
+
+# zwave:
+#  usb_path: /dev/ttyACM0
+#  network_key: "0x49, 0x43, 0x1D, 0xBD, 0x03, 0x6D, 0x9D, 0x8C, 0x39, 0x67, 0x16, 0x82, 0xA8, 0x67, 0xEE, 0x91"
+
+speedtestdotnet:
+  monitored_conditions:
+    - ping
+    - download
+    - upload

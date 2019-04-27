@@ -1,0 +1,6 @@
+# TIMERS
+
+# Backdoor closed light timer - 5 Minutes
+
+backdoor:
+  duration: '00:05:00'

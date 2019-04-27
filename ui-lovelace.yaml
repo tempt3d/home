@@ -1,0 +1,263 @@
+
+resources:
+  - url: /local/day-countdown/day-countdown.js
+    type: js
+  - url: /local/mini-graph/mini-graph-card-bundle.js?v=0.3.0
+    type: module
+
+# Lovelace YAML
+
+title: Home
+views:
+  - title: default_view
+    icon: mdi:home
+    cards:
+      - type: entities
+        show_header_toggle: false
+        entities:
+#          - device_tracker.aaronphone_gps
+          - person.aaron
+#          - device_tracker.erica_iphone_gps
+          - person.erica
+#      - type: entities
+#        show_header_toggle: false
+#        entities:
+#          - sensor.aaron_to_work
+#          - sensor.aaron_to_home
+      - type: weather-forecast
+        entity: weather.dark_sky
+        name: Edmonton
+      - type: entities
+        title: Occupency Sensors
+        show_header_toggle: false
+        entities:
+          - binary_sensor.basement_occupancy
+          - binary_sensor.bedroom_occupancy
+          - binary_sensor.home_occupancy
+          - binary_sensor.living_room_occupancy
+          - binary_sensor.motion_sensor_158d0001d69546
+      - type: glance
+        title: Door Status
+        show_header_toggle: false
+        entities:
+          - entity: binary_sensor.door_window_sensor_158d000222ca73
+            name: front door
+            icon: mdi:door
+          - entity: binary_sensor.door_window_sensor_158d0001f3990c
+            name: back door
+            icon: mdi:door
+          - entity: binary_sensor.door_window_sensor_158d000224ff31
+            name: garage door
+            icon: mdi:door
+#          - entity: lock.lock_back_door_lock
+#            name: back lock
+#            icon: mdi:lock-outline
+      - type: entities
+        title: Leak Detectors
+        show_header_toggle: false
+        entities:
+          - binary_sensor.water_leak_sensor_158d000211227a
+          - sensor.door_last_opened
+      - type: thermostat
+        entity: climate.home
+  - title: climate
+    icon: mdi:oil-temperature
+    cards:
+      - type: entities
+        title: Temperature
+        show_header_toggle: false
+        entities:
+          - sensor.home_temperature
+          - sensor.living_room_temperature
+          - sensor.temperature_158d000201ee00
+          - sensor.bedroom_temperature
+          - sensor.temperature_158d000201c949
+          - sensor.basement_temperature
+      - type: entities
+        title: Humidity
+        show_header_toggle: false
+        entities:
+          - sensor.home_humidity
+          - sensor.humidity_158d000201c949
+          - sensor.humidity_158d000201ee00
+  - title: security
+    icon: mdi:cctv
+    cards:
+      - type: picture-entity
+        title: doorbell
+        entity: camera.doorbell
+        camera_image: camera.doorbell
+        show_info: true
+        tap_action: dialog
+      - type: picture-entity
+        title: Back Alley
+        entity: camera.back_alley
+        camera_image: camera.back_alley
+        show_info: true
+        tap_action: dialog
+      - type: picture-entity
+        title: Hannah Room
+        entity: camera.hannah_cam
+        camera_image: camera.hannah_cam
+        show_info: true
+        tap_action: dialog
+  - title: lights
+    icon: mdi:lightbulb-outline
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: glance        
+            title: Outdoor Lights
+            entities:
+              - entity: switch.back_door_light
+                tap_action:
+                  action: toggle
+                name: Back Door
+              - entity: switch.front_door_light
+                tap_action:
+                  action: toggle
+                name: Front Door
+          - type: glance
+            title: Interior Lights
+            entities:
+              - entity: light.gateway_light_7811dcb25887
+                tap_action:
+                  action: toggle
+                name: Gateway 
+              - entity: light.hue_bed
+                tap_action:
+                  action: toggle
+                name: Bedroom
+              - entity: light.hue_backdoor
+                tap_action:
+                  action: toggle
+                name: Backdoor
+#          - binary_sensor.switch_158d000210a061
+              - entity: light.hue_lightstrip
+                tap_action:
+                  action: toggle
+                name: Lightstrip
+              - entity: light.hue_lightstrip2
+                tap_action:
+                  action: toggle
+                name: Lightstrip2
+  - title: data
+    icon: mdi:server-network
+    cards:
+      - type: entities
+        title: Pi-hole Status
+        show_header_toggle: false
+        entities:
+          - sensor.pi_hole_ads_blocked_today
+      - type: entities
+        title: Synology Status
+        show_header_toggle: false
+        entities:
+          - sensor.cpu_load_total
+          - sensor.memory_usage_real
+          - sensor.network_up
+      - type: entities
+        title: Speedtest Results
+        show_header_toggle: false
+        entities:
+          - sensor.speedtest_ping
+          - sensor.speedtest_download
+          - sensor.speedtest_upload
+      - type: entities
+        title: System Monitor
+        show_header_toggle: false
+        entities:
+          - sensor.processor_use
+          - sensor.disk_free
+          - sensor.memory_free
+  - title: automations
+    icon: mdi:robot
+    cards:
+      - type: entities
+        title: Locations
+        show_header_toggle: false
+        entities:
+          - automation.aaron_is_home_notification
+          - automation.erica_is_home_notification
+          - automation.erica_is_away_notification
+          - automation.erica_is_leaving_work
+      - type: entities
+        title: Lights
+        show_header_toggle: false
+        entities:
+          - automation.backdoor_light_on
+          - automation.backdoor_light_off
+          - automation.kitchen_motion_sensor_lights_on
+          - automation.kitchen_motion_sensor_lights_off
+          - automation.turn_on_the_lights_when_the_sun_sets
+          - automation.turn_off_light_at_830
+      - type: entities
+        title: Doors
+        show_header_toggle: false
+        entities:
+          - automation.door_chimes
+          - automation.garage_door_is_open
+          - automation.door_opened_while_gone
+      - type: entities
+        title: Water
+        show_header_toggle: false
+        entities:
+          - automation.water_alert_notification
+  - title: Door Lock Information, Codes and Configuration
+    icon: mdi:home-lock-open
+    cards:
+      - type: entities
+        title: Entry Code 2
+        show_header_toggle: false
+        entities:
+          - input_text.door_keypad_2_name
+          - input_text.door_keypad_2_code
+          - input_select.door_keypad_2_access_schedule
+          - input_datetime.door_keypad_2_date_start
+          - input_datetime.door_keypad_2_date_end
+          - input_boolean.door_keypad_2_back_switch
+          - script.door_keypad_2_delete
+      - type: entities
+        title: Entry Code 3
+        show_header_toggle: false
+        entities:
+          - input_text.door_keypad_3_name
+          - input_text.door_keypad_3_code
+          - input_select.door_keypad_3_access_schedule
+          - input_datetime.door_keypad_3_date_start
+          - input_datetime.door_keypad_3_date_end
+          - input_boolean.door_keypad_3_back_switch
+          - script.door_keypad_3_delete
+      - type: entities
+        title: Entry Code 4
+        show_header_toggle: false
+        entities:
+          - input_text.door_keypad_4_name
+          - input_text.door_keypad_4_code
+          - input_select.door_keypad_4_access_schedule
+          - input_datetime.door_keypad_4_date_start
+          - input_datetime.door_keypad_4_date_end
+          - input_boolean.door_keypad_4_back_switch
+          - script.door_keypad_4_delete
+      - type: entities
+        title: Back Door Configuration Options
+        show_header_toggle: true
+        entities:
+          - input_select.lock_zwave_option_3_back
+          - input_select.lock_zwave_option_4_back
+          - input_select.lock_zwave_option_5_back
+          - input_select.lock_zwave_option_7_back
+          - input_select.lock_zwave_option_8_back
+          - input_select.lock_zwave_option_9_back
+          - input_select.lock_zwave_option_10_back
+          - input_select.lock_zwave_option_11_back
+          - input_select.lock_zwave_option_15_back
+          - input_select.lock_zwave_option_16_back
+      - type: entities
+        title: Back Door Info
+        show_header_toggle: false
+        entities:
+          - lock.lock_back_door_lock
+          - sensor.back_door_report
+          - sensor.backdoor_code
+          - sensor.door_lock_batteries_back_door

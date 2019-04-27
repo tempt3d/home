@@ -1,0 +1,66 @@
+# Ha Versions  
+  - platform: version  
+
+# System Monitor
+  - platform: systemmonitor
+    resources:
+      - type: disk_free
+        arg: /
+      - type: memory_free
+      - type: processor_use
+
+# SynologyDSM
+  - platform: synologydsm
+    host: !secret synology_url
+    username: !secret synology_user
+    password: !secret synology_pass
+    ssl: False
+    port: 5000
+    monitored_conditions:
+      - cpu_total_load
+      - memory_real_usage
+      - network_up
+
+# time_date
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'time_date'
+
+# HA Uptime 
+  - platform: uptime
+    name: "HA runtime in minutes"
+    unit_of_measurement: minutes
+
+# Pi-hole
+  - platform: pi_hole
+    host: 192.168.1.22
+    location: admin      
+
+# Aaron's commute to Work
+#  - platform: waze_travel_time
+#    name: Aaron to Work
+#    origin: zone.home
+#    destination: zone.work
+#    region: 'US'
+  
+ # Aaron's commute to Home
+#  - platform: waze_travel_time
+#    name: Aaron to Home
+#    origin: zone.work
+#    destination: zone.home
+#    region: 'US'
+  
+# Back Door last opened
+  - platform: template
+    sensors:
+      door_last_opened:
+        friendly_name: "Back door last opened:"        
+ #       value_template: "{{states.binary_sensor.door_window_sensor_158d0001f3990c.last_changed.strftime('%H:%M')}}"
+        value_template: '{{ as_timestamp(states.binary_sensor.door_window_sensor_158d0001f3990c.last_updated) | timestamp_custom("%a %-I:%M%p", True) }}'
+
+#         value_template: "{{states.binary_sensor.door_window_sensor_158d0001f3990c.last_changed.strftime('%d/%m/%Y %H:%M:%S')}}"
+
+

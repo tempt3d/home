@@ -1,0 +1,22 @@
+# Zones
+
+# Work - Cintas
+  - name: Work
+    latitude: 53.564896
+    longitude: -113.628653
+    radius: 100
+    icon: mdi:truck-fast
+
+ # Work - Hospital
+  - name: Hospital
+    latitude: 53.5568536
+    longitude: -113.4989251
+    radius: 250
+    icon: mdi:hospital-building
+
+# Home
+  - name: Home
+    latitude: 53.524441
+    longitude: -113.435809
+    radius: 80
+    icon: mdi:home
