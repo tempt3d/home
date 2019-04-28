@@ -1,0 +1,11 @@
+# Water Leak
+- alias: Water Alert Notification
+  trigger:
+    platform: state
+    entity_id: binary_sensor.water_leak_sensor_158d000211227a
+    from: 'off'
+    to: 'on'
+  action:
+    service: notify.pushover
+    data:
+      message: "There's a leak in the utility room!"

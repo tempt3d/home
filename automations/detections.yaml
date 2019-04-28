@@ -1,0 +1,54 @@
+# Locations
+
+# Erica is Home
+- alias: Erica is home notification
+  initial_state: false 
+  trigger:
+    platform: state
+    entity_id: person.erica
+    from: 'not_home'
+    to: 'home'
+  action:
+    service: notify.pushover
+    data:
+      message: "Erica is at home at {{ states('sensor.date_time') }}"
+
+# Aaron is Home
+- alias: Aaron is home notification
+  trigger:
+    platform: state
+    entity_id: person.aaron
+    from: 'not_home'
+    to: 'home'
+  action:
+    service: notify.pushover
+    data:
+      message: "You're Home! @ {{ states('sensor.date_time') }}"
+
+# Erica is away
+- alias: Erica is away notification
+  initial_state: false
+  trigger:
+    platform: state
+    entity_id: person.erica
+    from: 'home'
+    to: 'not_home'
+  action:
+    service: notify.pushover
+    data:
+      message: "Erica is gone at {{ states('sensor.date_time') }}"
+
+# Erica is leaving work
+- alias: Erica is leaving work
+  trigger:
+    platform: zone
+    entity_id: device_tracker.erica_iphone_gps
+    zone: zone.Hospital
+    event: leave
+  action:
+    service: notify.pushover
+    data:
+      message: "Erica is leaving work at {{ states('sensor.date_time') }}"
+
+
+

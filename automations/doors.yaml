@@ -1,0 +1,47 @@
+# DOORS
+
+# Door Chimes
+- alias: Door Chimes
+  trigger:
+    platform: state
+    entity_id: group.doors
+    from: 'off'
+    to: 'on'
+  condition: 
+    condition: time
+    after: '07:30'
+    before: '19:00'
+  action:
+    service: xiaomi_aqara.play_ringtone
+    data:
+      gw_mac: 78:11:DC:B2:58:87
+      ringtone_id: 11
+      ringtone_vol: 2
+
+# Garage Door is open
+- alias: Garage door is open
+  trigger:
+    platform: state
+    entity_id: binary_sensor.door_window_sensor_158d000224ff31
+    from: 'off'
+    to: 'on'
+  action:
+    service: notify.pushover
+    data:
+      message: 'The Garage door is open'
+
+# DOOR OPENED AND NOBODY HOME
+- alias: Door opened while gone
+  trigger:
+    platform: state
+    entity_id: group.doors
+    from: 'off'
+    to: 'on'
+  condition: 
+    condition: state
+    entity_id: group.family
+    state: 'not_home'
+  action:
+    service: notify.pushover
+    data:
+      message: 'A Door has been opened and nobody is home!'
